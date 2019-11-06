@@ -318,13 +318,13 @@
 				alert("亲，当前没有图片可以旋转!");
 				return;
 			}
-			var loacl;
+			let local;
 			if (!point) {
-				loacl = loaclToLoacl($moveLayer, $clipView, clipWidth * .5, clipHeight * .5);
+				local = localToLocal($moveLayer, $clipView, clipWidth * .5, clipHeight * .5);
 			} else {
-				loacl = globalToLoacl($moveLayer, point.x, point.y);
+				local = globalToLocal($moveLayer, point.x, point.y);
 			}
-			var origin = calculateOrigin(curAngle, loacl), // 旋转中使用的参考点坐标
+			var origin = calculateOrigin(curAngle, local), // 旋转中使用的参考点坐标
 				originX = origin.x,
 				originY = origin.y,
 
@@ -458,7 +458,7 @@
 				alert("亲，当前没有图片可以裁剪!");
 				return;
 			}
-			var local = loaclToLoacl($moveLayer, $clipView);
+			let local = localToLocal($moveLayer, $clipView);
 			var scale = myScroll.scale;
 			var ctx = canvas.getContext("2d");
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -491,7 +491,7 @@
 				containerHeight = $container.height();
 			});
 		}
-		function loaclToLoacl($layerOne, $layerTwo, x, y) { // 计算$layerTwo上的x、y坐标在$layerOne上的坐标
+		function localToLocal($layerOne, $layerTwo, x, y) { // 计算$layerTwo上的x、y坐标在$layerOne上的坐标
 			x = x || 0;
 			y = y || 0;
 			var layerOneOffset, layerTwoOffset;
@@ -506,7 +506,7 @@
 				y: layerTwoOffset.top - layerOneOffset.top + y
 			};
 		}
-		function globalToLoacl($layer, x, y) { // 计算相对于窗口的x、y坐标在$layer上的坐标
+		function globalToLocal($layer, x, y) { // 计算相对于窗口的x、y坐标在$layer上的坐标
 			x = x || 0;
 			y = y || 0;
 			var layerOffset;
