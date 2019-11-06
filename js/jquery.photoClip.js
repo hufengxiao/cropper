@@ -314,7 +314,10 @@
 		function rotateBy(angle, point) {
 			if (atRotation) return;
 			atRotation = true;
-
+			if (!imgLoaded) {
+				alert("亲，当前没有图片可以旋转!");
+				return;
+			}
 			var loacl;
 			if (!point) {
 				loacl = loaclToLoacl($moveLayer, $clipView, clipWidth * .5, clipHeight * .5);
